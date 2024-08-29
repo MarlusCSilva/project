@@ -12,13 +12,14 @@ class Organizador extends Model
         'nome_empresa',
     ];
 
-    public function usuario()
+    public function user()
     {
-        return $this->morphOne(User::class, 'polimorfismo');
+        return $this->morphOne(User::class, 'userable');
     }
 
-    public function events()
+    public function eventos()
     {
         return $this->hasMany(Evento::class);
     }
 }
+

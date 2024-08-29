@@ -3,51 +3,23 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use App\Models\Evento;
 use Illuminate\Http\Request;
+use App\Models\Evento;
 
-class EventoController extends Controller
+class OrganizadorController extends Controller
 {
     public function index()
     {
-        $eventos = Evento::all();
-        return view('eventos.index', compact('eventos'));
+        $eventos = auth()->user()->userable->eventos;
+        return view('organizador.eventos.index', compact('eventos'));
     }
 
-    public function create()
+    public function createEvent()
     {
-        return view('evento.create');
+        return view('organizador.eventos.create');
     }
 
-    public function store(Request $request)
-    {
-        $validated = $request->validate([
-            'nome' => 'required|string|max:255',
-            'descricao' => 'required',
-            'data' => 'required|date',
-            'hora' => 'required',
-            'localizacao' => 'required|string|max:255',
-            'maximo_participantes' => 'required|integer',
-            'status' => 'required|string|max:255',
-            'categoria' => 'required|string|max:255',
-        ]);
-
-        Evento::create($validated + ['organizador_id' => auth()->id()]);
-
-        return redirect()->route('evento.index')->with('success', 'Evento criado com sucesso.');
-    }
-
-    public function show(Evento $evento)
-    {
-        return view('evento.show', compact('evento'));
-    }
-
-    public function edit(Evento $evento)
-    {
-        return view('evento.edit', compact('evento'));
-    }
-
-    public function update(Request $request, Evento $evento)
+    public function storeEvento(Request $request)
     {
         $validated = $request->validate([
             'nome' => 'required|string|max:255',
@@ -60,15 +32,39 @@ class EventoController extends Controller
             'categoria' => 'required|string|max:255',
         ]);
 
-        $evento->update($validated);
+        $evento = new Evento($validated);
+        auth()->user()->userable->eventos()->save($evento);
 
-        return redirect()->route('evento.index')->with('success', 'Evento atualizado com sucesso.');
+        return redirect()->route('organizador.index')->with('success', 'Evento criado com sucesso.');
     }
 
-    public function destroy(Evento $evento)
+    public function editarEvento(Evento $evento)
     {
-        $evento->delete();
+        return view('organizador.eventos.edit', compact('evento'));
+    }
 
-        return redirect()->route('evento.index')->with('success', 'Evento deletado com sucesso.');
+    public function atualizarEvent(Request $request, Evento $evento)
+    {
+        $validated = $request->validate([
+            'nome' => 'required|string|max:255',
+            'descricao' => 'required',
+            'data' => 'required|date',
+            'hora' => 'required',
+            'localizacao' => 'required|string|max:255',
+            'maximo_participantes' => 'required|integer',
+            'status' => 'required|string|max:255',
+            'categoria' => 'required|string|max:255',
+        ]);
+
+        $event->update($validated);
+
+        return redirect()->route('organizador.index')->with('success', 'Evento atualizado com sucesso.');
+    }
+
+    public function deletarEvento(Evento $evento)
+    {
+        $event->delete();
+
+        return redirect()->route('organizador.index')->with('success', 'Evento deletado com sucesso.');
     }
 }

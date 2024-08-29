@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -12,11 +12,11 @@ class User extends Authenticatable
     use HasFactory, Notifiable;
 
     protected $fillable = [
-        'nome', 'email', 'usuario', 'senha',
+        'nome', 'email', 'username', 'password',
     ];
 
     protected $hidden = [
-        'senha', 'redefinir_senha',
+        'password', 'redefinir_password',
     ];
 
     protected $casts = [
@@ -24,7 +24,7 @@ class User extends Authenticatable
         'senha' => 'hashed',
     ];
 
-    public function polimorfismo()
+    public function userable()
     {
         return $this->morphTo();
     }

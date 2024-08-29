@@ -31,36 +31,31 @@ class ParticipanteController extends Controller
         return view('participante.show', compact('participante'));
     }
 
-    public function avaliarEventos()
-    {
-        $events = Evento::all();
-        return view('participante.eventos.available', compact('events'));
-    }
-
     public function participarEvento(Evento $evento)
     {
-        if ($evento->participante()->where('user_id', auth()->id())->exists()) {
-            return redirect()->route('participante.availableEvents')->with('error', 'Você já está cadastrado neste evento.');
+        if ($evento->participantes()->where('user_id', auth()->id())->exists()) {
+            return redirect()->route('participante.participarEvents')->with('error', 'Você já está cadastrado neste evento.');
         }
 
-        if ($evento->participante->count() >= $evento->maximo_participantes) {
-            return redirect()->route('participante.availableEvents')->with('error', 'Número máximo de participantes excedido para esse evento.');
+        if ($evento->participantes->count() >= $evento->maximo_participantes) {
+            return redirect()->route('participante.participarEvents')->with('error', 'Número máximo de participantes excedido para esse evento.');
         }
 
-        $registration = new Participantes([
+        $participante = new Participante([
             'user_id' => auth()->id(),
-            'evento_id' => $event->id,
-            'ticket' => str_random(10),
+            'evento_id' => $evento->id,
+            'ticket' => Str::random(10),
         ]);
 
-        $registration->save();
+        $participante->save();
 
-        return redirect()->route('participante.meusEventos')->with('success', 'You are successfully registered for the event.');
+        return redirect()->route('participante.meusEventos')->with('success', 'Você se cadastrou neste evento com sucesso.');
     }
 
     public function meusEventos()
     {
-        $participante = auth()->user()->polimorfismo->participante;
+        $participante = auth()->user()->userable->participante;
         return view('participante.participante.index', compact('participante'));
     }
+
 }

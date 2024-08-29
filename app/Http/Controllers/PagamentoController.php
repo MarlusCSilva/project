@@ -9,7 +9,7 @@ use App\Models\Participante;
 
 class PagamentoController extends Controller
 {
-    public function processPayment(Request $request, Participante $participante)
+    public function realizarPagamento(Request $request, Participante $participante)
     {
         $pagamento = new Pagamento([
             'participante_id' => $participante->id,
@@ -23,12 +23,12 @@ class PagamentoController extends Controller
         $pagamento->status = 'completed';
         $pagamento->save();
 
-        return redirect()->route('registrations.show', $registration)->with('success', 'Pagamento efetuado com sucesso.');
+        return redirect()->route('participante.show', $participante)->with('success', 'Pagamento efetuado com sucesso.');
     }
 
-    public function historicoPagamento(User $user)
+    public function historicoPagamento(Participante $participante)
     {
-        $pagamentos = $user->pagamentos;
+        $pagamentos = $participante->pagamentos;
         return view('pagamentos.history', compact('pagamentos'));
     }
 }

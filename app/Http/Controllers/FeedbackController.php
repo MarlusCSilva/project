@@ -23,6 +23,6 @@ class FeedbackController extends Controller
             'comentario' => $validated['comentario'],
         ]);
 
-        return redirect()->route('evento.show', $event)->with('success', 'Feedback publicado com sucesso.');
+        return redirect()->route('evento.show', $evento)->with('success', 'Feedback publicado com sucesso.');
     }
 }

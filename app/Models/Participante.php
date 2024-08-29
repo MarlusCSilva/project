@@ -11,7 +11,7 @@ class Participante extends Model
         'user_id', 'evento_id', 'ticket',
     ];
 
-    public function usuario()
+    public function user()
     {
         return $this->belongsTo(User::class);
     }
