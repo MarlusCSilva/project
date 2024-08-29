@@ -12,6 +12,9 @@ Route::get('/home', function () {
 Route::get('/eventos', function () {
     return view('eventos');
 })->name('eventos');
+Route::get('/myeventos', function () {
+    return view('myeventos');
+})->name('myeventos');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
