@@ -1,2 +1,2 @@
 @include('layouts.navigation')
-<h1>TESTATANDO</h1>
+<h3>funciona</h3>
