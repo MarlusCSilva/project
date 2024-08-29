@@ -28,6 +28,7 @@ class EventoController extends Controller
             'hora' => 'required',
             'localizacao' => 'required|string|max:255',
             'maximo_participantes' => 'required|integer',
+            'status' => 'required|string|max:255',
             'categoria' => 'required|string|max:255',
         ]);
 
@@ -55,6 +56,7 @@ class EventoController extends Controller
             'hora' => 'required',
             'localizacao' => 'required|string|max:255',
             'maximo_participantes' => 'required|integer',
+            'status' => 'required|string|max:255',
             'categoria' => 'required|string|max:255',
         ]);
 

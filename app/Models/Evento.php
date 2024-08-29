@@ -9,7 +9,8 @@ class Evento extends Model
 {
     protected $fillable = [
         'nome', 'descricao', 'data', 'hora', 'localizacao', 
-        'maximo_participantes', 'categoria', 'organizador_id',
+        'maximo_participantes', 'status','categoria',
+        'organizador_id',
     ];
 
     public function organizador()
