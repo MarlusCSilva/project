@@ -1,3 +1,5 @@
+<!-- Scripts -->
+@vite(['resources/sass/app.scss', 'resources/js/app.js'])
 @include('partials.header')
 <h1>Lista de Eventos</h1>
 
