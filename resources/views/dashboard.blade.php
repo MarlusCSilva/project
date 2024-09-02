@@ -6,29 +6,20 @@
         </h2>
     </x-slot>
 
-    <!-- <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 text-center">
-            <div class="bg-black dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900 dark:text-gray-100">
-                    {{ __("Você logou!, você consegue fazer tudo em menos de 4 dias?") }}
-                </div>
-            </div>
-        </div>
-    </div> -->
-    <div id="carouselExampleCaptions" class="carousel slide">
-  <div class="carousel-indicators">
-    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
-    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
-  </div>
-  <div class="carousel-inner">
-    <div class="carousel-item active">
-      <img src="https://image.khaleejtimes.com/?uuid=c6164f6d-a0a6-5492-96c9-395b0455f1cf&function=cropresize&type=preview&source=false&q=75&crop_w=0.99999&crop_h=0.74971&x=0&y=0&width=1200&height=675" class="d-block w-100" alt="...">
-      <div class="carousel-caption d-none d-md-block">
-        <h5>First slide label</h5>
-        <p>Some representative placeholder content for the first slide.</p>
-      </div>
+  <div id="carouselExampleCaptions" class="carousel slide">
+    <div class="carousel-indicators">
+      <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+      <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+      <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
     </div>
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <img src="https://image.khaleejtimes.com/?uuid=c6164f6d-a0a6-5492-96c9-395b0455f1cf&function=cropresize&type=preview&source=false&q=75&crop_w=0.99999&crop_h=0.74971&x=0&y=0&width=1200&height=675" class="d-block w-100" alt="...">
+        <div class="carousel-caption d-none d-md-block">
+          <h5>First slide label</h5>
+          <p>Some representative placeholder content for the first slide.</p>
+        </div>
+      </div>
     <div class="carousel-item">
       <img src="https://image.khaleejtimes.com/?uuid=c6164f6d-a0a6-5492-96c9-395b0455f1cf&function=cropresize&type=preview&source=false&q=75&crop_w=0.99999&crop_h=0.74971&x=0&y=0&width=1200&height=675" class="d-block w-100" alt="...">
       <div class="carousel-caption d-none d-md-block">

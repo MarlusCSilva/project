@@ -1,2 +1,12 @@
-@include('layouts.navigation')
-<h1>TESTATANDO</h1>
+@include('partials.header')
+<h1>Lista de Eventos</h1>
+
+@if($eventos->isEmpty())
+    <p>Não há eventos cadastrados.</p>
+@else
+    <ul>
+        @foreach($eventos as $evento)
+            <li>{{ $evento->nome }} - {{ $evento->data }}</li>
+        @endforeach
+    </ul>
+@endif
