@@ -5,6 +5,12 @@
     @if (Route::has('login'))
         <nav class="mx-3 flex justify-end align-items-center m-2">
             @auth
+                <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                    {{ __('Dashboard') }}
+                </x-nav-link>
+                <x-nav-link :href="route('home')" :active="request()->routeIs('home')">
+                    {{ __('Home') }}
+                </x-nav-link>
                 <!-- DropDown Profile -->
                 <div class="hidden sm:flex sm:items-center sm:ms-6">
                     <x-dropdown align="right" width="48">
@@ -24,7 +30,6 @@
                                 </div>
                             </button>
                         </x-slot>
-
                         <x-slot name="content">
                             @Auth
                                 <x-dropdown-link :href="route('profile.edit')">
@@ -40,14 +45,6 @@
                         </x-slot>
                     </x-dropdown>
                 </div>
-                <a href="{{ url('/dashboard') }}"
-                    class="bg-light text-dark p-2 rounded-md m-2 fs-6 text-decoration-none fw-bold">
-                    <span><i class="bi bi-box-arrow-in-right"></i></span>
-                    <span>Dashboard</span>
-                </a>
-                <x-nav-link :href="route('home')" :active="request()->routeIs('home')">
-                    {{ __('Home') }}
-                </x-nav-link>
             @else
                 <!-- Botões "Sign In" e "Sign Up" para telas maiores -->
                 <a href="{{ route('login') }}"
