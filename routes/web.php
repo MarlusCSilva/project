@@ -19,6 +19,7 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+Route::get('eventos', [EventoController::class, 'index'])->name('eventos');
 
 Route::middleware(['auth'])->group(function () {
     Route::post('/evento/{evento}/participar', [ParticipanteController::class, 'store'])->name('participante.store');

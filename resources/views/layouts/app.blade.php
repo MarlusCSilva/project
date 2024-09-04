@@ -1,5 +1,10 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+    <style>
+        .scroll-hidden {
+            overflow-y: scroll;
+        }
+    </style>
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -14,7 +19,7 @@
         <!-- Scripts -->
         @vite(['resources/sass/app.scss', 'resources/js/app.js'])
     </head>
-    <body class="font-sans antialiased flex flex-col min-h-screen">
+    <body class="font-sans antialiased flex flex-col min-h-screen scroll-hidden">
         <header>
             @include('partials.header')
         </header>
