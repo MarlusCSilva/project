@@ -12,9 +12,8 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
 
-class RegisteredUserController extends Controller
+class RegisteredOrganizadorController extends Controller
 {
-
     public function create(): View
     {
         return view('auth.register');
@@ -24,6 +23,7 @@ class RegisteredUserController extends Controller
     {
         $request->validate([
             'nome' => 'required|string|max:255',
+            'nome_empresa' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'username' => 'required|string|max:255|unique:users',
             'password' => 'required|string|confirmed|min:8',
@@ -31,13 +31,14 @@ class RegisteredUserController extends Controller
 
         $user = User::create([
             'nome' => $request->input('nome'),
+            'nome_empresa' => $request->input('nome_empresa'),
             'tipo_usuario' => $request->input('tipo_usuario'),
             'email' => $request->input('email'),
             'username' => $request->input('username'),
             'password' => Hash::make($request->input('password')),
         ]);
 
-        auth()->login($user);
+        Auth::login($user);
 
         return redirect()->route('dashboard');
     }

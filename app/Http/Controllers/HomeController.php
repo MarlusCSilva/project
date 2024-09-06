@@ -11,6 +11,6 @@ class HomeController extends Controller
     {
         $eventos = Evento::all();
 
-        return view('home', compact('eventos'));
+        return view('dashboard', compact('eventos'));
     }
 }

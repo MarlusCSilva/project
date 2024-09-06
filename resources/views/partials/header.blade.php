@@ -12,6 +12,10 @@
                     <x-nav-link :href="route('eventos')" :active="request()->routeIs('eventos')">
                         {{ __('Eventos') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('participante.meusEventos')" :active="request()->routeIs('participante.meusEventos')">
+                        {{ __('Meus Eventos') }}
+                    </x-nav-link>
+
                 @else
                     <a href="{{ route('login') }}"
                         class="bg-light text-dark p-2 rounded-md m-2 fs-6 text-decoration-none fw-bold d-none d-md-block">
@@ -34,10 +38,14 @@
         </div>
 
         <div class="d-flex align-items-center ms-auto mx-3">
-            <form class="form-inline d-flex me-3 my-1">
-                <input class="form-control me-2" type="search" placeholder="Pesquisar" aria-label="Pesquisar">
-                <button class="btn btn-outline-success" type="submit">Pesquisar</button>
-            </form>
+        <button type="button" class="btn btn-primary position-relative me-3">
+            <span>Pagar Eventos</span>
+            <i class="bi bi-cart3"></i>
+            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                {{ Auth::user()->userable && Auth::user()->userable->eventos ? Auth::user()->userable->eventos->count() : 0 }}
+                <span class="visually-hidden">unread messages</span>
+            </span>
+        </button>
 
             <x-dropdown align="right" width="48">
                 <x-slot name="trigger">
@@ -58,6 +66,10 @@
 
                 <x-slot name="content">
                     @auth
+                        <div class="d-flex align-items-center px-4 py-2 text-dark border-bottom">
+                            <i class="bi bi-person-fill me-2"></i> <!-- Ícone com margem à direita -->
+                            <p class="mb-0">{{ Auth::user()->username }}</p> <!-- Texto sem margem inferior -->
+                        </div>
                         <x-dropdown-link :href="route('profile.edit')">
                             {{ __('Profile') }}
                         </x-dropdown-link>

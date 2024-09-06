@@ -6,15 +6,15 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
+    
     public function up(): void
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('nome');
             $table->string('email')->unique();
+            $table->string('tipo_usuario')->nullable();
+            $table->string('username')->unique();
             $table->timestamp('email_verificado_em')->nullable();
             $table->string('password');
             $table->rememberToken();
@@ -48,11 +48,24 @@ return new class extends Migration
             $table->string('categoria');
             $table->timestamps();
         });
+
+        Schema::create('participantes', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->foreignId('evento_id')->constrained()->onDelete('cascade');
+            $table->string('ticket');
+            $table->timestamps();
+        });
+
+        Schema::create('organizadores', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->string('nome_empresa')->nullable()->unique();
+            $table->timestamps();
+        });
+        
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::dropIfExists('users');

@@ -56,14 +56,14 @@ class OrganizadorController extends Controller
             'categoria' => 'required|string|max:255',
         ]);
 
-        $event->update($validated);
+        $evento->update($validated);
 
         return redirect()->route('organizador.index')->with('success', 'Evento atualizado com sucesso.');
     }
 
     public function deletarEvento(Evento $evento)
     {
-        $event->delete();
+        $evento->delete();
 
         return redirect()->route('organizador.index')->with('success', 'Evento deletado com sucesso.');
     }

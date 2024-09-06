@@ -54,8 +54,11 @@ class ParticipanteController extends Controller
 
     public function meusEventos()
     {
-        $participante = auth()->user()->userable->participante;
-        return view('participante.participante.index', compact('participante'));
+        $userable = auth()->user()->userable;
+        $eventos = $userable instanceof Participante ? $userable->eventos : collect();
+        return view('participante.meusEventos', compact('eventos'));
     }
+    
+
 
 }

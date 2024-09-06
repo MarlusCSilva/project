@@ -1,6 +1,6 @@
 @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 @include('partials.header')
-<h1 class="mt-5 p-5">Lista de Eventos</h1c>
+<h1 class="mt-5 p-5">Lista de Eventos</h1>
 
 @if($eventos->isEmpty())
     <p>Não há eventos cadastrados.</p>
