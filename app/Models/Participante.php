@@ -18,7 +18,7 @@ class Participante extends Model
 
     public function eventos()
     {
-        return $this->belongsToMany(Evento::class);
+        return $this->belongsToMany(Evento::class, 'event_participant');
     }
 
     public function pagamento()

@@ -28,4 +28,14 @@ class User extends Authenticatable
     {
         return $this->morphTo();
     }
+
+    public function organizador()
+    {
+        return $this->hasOne(Organizador::class);
+    }
+
+    public function participante()
+    {
+        return $this->hasOne(Participante::class);
+    }
 }

@@ -20,7 +20,7 @@ class Evento extends Model
 
     public function participantes()
     {
-        return $this->hasMany(Participante::class);
+        return $this->belongsToMany(Participante::class, 'event_participant');
     }
 
     public function feedbacks()

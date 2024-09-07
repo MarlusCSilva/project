@@ -1,4 +1,4 @@
-<div class="fixed-top d-flex justify-content-between bg-dark text-light" style="max-height: 85px;">
+<div class="d-flex justify-content-between bg-dark text-light" style="max-height: 85px;">
     <div class="justify-start text-center">
         <x-application-logo />
     </div>
@@ -6,15 +6,24 @@
         <div class="d-flex flex-grow-1 justify-content-center">
             <nav class="mx-3 d-flex align-items-center">
                 @auth
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                        {{ __('Dashboard') }}
-                    </x-nav-link>
-                    <x-nav-link :href="route('eventos')" :active="request()->routeIs('eventos')">
-                        {{ __('Eventos') }}
-                    </x-nav-link>
-                    <x-nav-link :href="route('participante.meusEventos')" :active="request()->routeIs('participante.meusEventos')">
-                        {{ __('Meus Eventos') }}
-                    </x-nav-link>
+                    @if (Auth::user()->tipo_usuario == 'participante')
+                        <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                            {{ __('Dashboard') }}
+                        </x-nav-link>
+                        <x-nav-link :href="route('eventos')" :active="request()->routeIs('eventos')">
+                            {{ __('Eventos') }}
+                        </x-nav-link>
+                        <x-nav-link :href="route('participante.meusEventos')" :active="request()->routeIs('participante.meusEventos')">
+                            {{ __('Meus Eventos') }}
+                        </x-nav-link>
+                    @elseif (Auth::user()->tipo_usuario == 'organizador')
+                        <x-nav-link :href="route('organizador.index')" :active="request()->routeIs('organizador.index')">
+                            {{ __('Meus Eventos') }}
+                        </x-nav-link>
+                        <x-nav-link :href="route('organizador.criarEvento')" :active="request()->routeIs('organizador.criarEvento')">
+                            {{ __('Criar Evento') }}
+                        </x-nav-link>
+                    @endif
 
                 @else
                     <a href="{{ route('login') }}"
@@ -38,14 +47,14 @@
         </div>
 
         <div class="d-flex align-items-center ms-auto mx-3">
-        <button type="button" class="btn btn-primary position-relative me-3">
-            <span>Pagar Eventos</span>
-            <i class="bi bi-cart3"></i>
-            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                {{ Auth::user()->userable && Auth::user()->userable->eventos ? Auth::user()->userable->eventos->count() : 0 }}
-                <span class="visually-hidden">unread messages</span>
-            </span>
-        </button>
+            <button type="button" class="btn btn-primary position-relative me-3">
+                <span>Pagar Eventos</span>
+                <i class="bi bi-cart3"></i>
+                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                    {{ Auth::user()->userable && Auth::user()->userable->eventos ? Auth::user()->userable->eventos->count() : 0 }}
+                    <span class="visually-hidden">unread messages</span>
+                </span>
+            </button>
 
             <x-dropdown align="right" width="48">
                 <x-slot name="trigger">

@@ -8,6 +8,7 @@ use App\Http\Controllers\PagamentoController;
 use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\ParticipanteController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\AdministradorController;  
 
 Route::get('/', function () {
     return view('welcome');
@@ -39,9 +40,9 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::post('/admin/configuracoes', [AdministradorController::class, 'atualizarConfiguracoesSite'])->name('admin.atualizarConfiguracoesSite');
 });
 
-Route::middleware(['auth', 'organizador'])->group(function () {
+Route::middleware(['auth'])->group(function () {
     Route::get('/organizador/eventos', [OrganizadorController::class, 'index'])->name('organizador.index');
-    Route::get('/organizador/eventos/criar', [OrganizadorController::class, 'createEvent'])->name('organizador.createEvent');
+    Route::get('/organizador/eventos/criar', [OrganizadorController::class, 'createEvent'])->name('organizador.criarEvento');
     Route::post('/organizador/eventos', [OrganizadorController::class, 'storeEvento'])->name('organizador.storeEvento');
     Route::get('/organizador/eventos/{evento}/editar', [OrganizadorController::class, 'editarEvento'])->name('organizador.editarEvento');
     Route::put('/organizador/eventos/{evento}', [OrganizadorController::class, 'atualizarEvent'])->name('organizador.atualizarEvent');

@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Evento;
 
@@ -10,61 +9,65 @@ class OrganizadorController extends Controller
 {
     public function index()
     {
-        $eventos = auth()->user()->userable->eventos;
-        return view('organizador.eventos.index', compact('eventos'));
+        $eventos = Evento::all();
+        return view('organizador.index', compact('eventos'));
     }
 
     public function createEvent()
     {
-        return view('organizador.eventos.create');
+        return view('organizador.criarEvento');
     }
 
-    public function storeEvento(Request $request)
+        public function storeEvento(Request $request)
     {
         $validated = $request->validate([
-            'nome' => 'required|string|max:255',
+            'nome' => 'required',
             'descricao' => 'required',
             'data' => 'required|date',
             'hora' => 'required',
-            'localizacao' => 'required|string|max:255',
+            'localizacao' => 'required',
             'maximo_participantes' => 'required|integer',
-            'status' => 'required|string|max:255',
-            'categoria' => 'required|string|max:255',
+            'status' => 'required',
+            'categoria' => 'required',
         ]);
 
-        $evento = new Evento($validated);
-        auth()->user()->userable->eventos()->save($evento);
-
-        return redirect()->route('organizador.index')->with('success', 'Evento criado com sucesso.');
+        $organizador = auth()->user()->organizador;
+        $validated['organizador_id'] = $organizador->id;
+        Evento::create($validated);
+        return redirect()->route('organizador.index');
     }
 
-    public function editarEvento(Evento $evento)
+
+    public function editarEvento($id)
     {
-        return view('organizador.eventos.edit', compact('evento'));
+        $evento = Evento::findOrFail($id);
+        return view('organizador.editarEvento', compact('evento'));
     }
 
-    public function atualizarEvent(Request $request, Evento $evento)
+    public function atualizarEvent(Request $request, $id)
     {
         $validated = $request->validate([
-            'nome' => 'required|string|max:255',
+            'titulo' => 'required',
             'descricao' => 'required',
             'data' => 'required|date',
             'hora' => 'required',
-            'localizacao' => 'required|string|max:255',
-            'maximo_participantes' => 'required|integer',
-            'status' => 'required|string|max:255',
-            'categoria' => 'required|string|max:255',
+            'localizacao' => 'required',
+            'numero_max_participantes' => 'required|integer',
+            'status' => 'required',
+            'categoria' => 'required',
         ]);
 
+        $evento = Evento::findOrFail($id);
         $evento->update($validated);
 
-        return redirect()->route('organizador.index')->with('success', 'Evento atualizado com sucesso.');
+        return redirect()->route('organizador.index');
     }
 
-    public function deletarEvento(Evento $evento)
+    public function deletarEvento($id)
     {
+        $evento = Evento::findOrFail($id);
         $evento->delete();
 
-        return redirect()->route('organizador.index')->with('success', 'Evento deletado com sucesso.');
+        return redirect()->route('organizador.index');
     }
 }

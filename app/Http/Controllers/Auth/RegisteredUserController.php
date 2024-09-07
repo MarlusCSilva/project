@@ -11,34 +11,48 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
+use App\Models\Organizador;
+use App\Models\Participante;
 
 class RegisteredUserController extends Controller
 {
-
     public function create(): View
     {
         return view('auth.register');
     }
-
     public function store(Request $request)
     {
         $request->validate([
-            'nome' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
-            'username' => 'required|string|max:255|unique:users',
-            'password' => 'required|string|confirmed|min:8',
+            'nome' => 'required',
+            'email' => 'required|email|unique:users',
+            'username' => 'required|unique:users',
+            'password' => 'required|confirmed',
+            'tipo_usuario' => 'required|in:participante,organizador',
+            'eventos' => 'array', 
+            'eventos.*' => 'exists:events,id',
         ]);
 
         $user = User::create([
-            'nome' => $request->input('nome'),
-            'tipo_usuario' => $request->input('tipo_usuario'),
-            'email' => $request->input('email'),
-            'username' => $request->input('username'),
-            'password' => Hash::make($request->input('password')),
+            'nome' => $request->nome,
+            'email' => $request->email,
+            'username' => $request->username,
+            'password' => bcrypt($request->password),
+            'tipo_usuario' => $request->tipo_usuario,
         ]);
+
+        if ($request->tipo_usuario === 'organizador') {
+            Organizador::create(['user_id' => $user->id, 'nome_empresa' => $request->nome_empresa]);
+        } else {
+            $participante = Participante::create(['user_id' => $user->id]);
+
+            if ($request->has('eventos')) {
+                $participante->eventos()->attach($request->eventos);
+            }
+        }
 
         auth()->login($user);
 
         return redirect()->route('dashboard');
     }
+
 }

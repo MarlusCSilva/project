@@ -64,7 +64,7 @@
 
         <!-- Formulário de Organizador -->
         <div class="tab-pane fade" id="organizador" role="tabpanel" aria-labelledby="organizador-tab">
-            <form method="POST" action="{{ route('register.organizador') }}">
+            <form method="POST" action="{{ route('register') }}">
                 @csrf
 
                 <!-- Campo Oculto para Tipo de Usuário -->
