@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Participante extends Model
 {
     protected $fillable = [
-        'user_id', 'evento_id', 'ticket',
+        'user_id', 'evento_id',
     ];
 
     public function user()
@@ -18,11 +18,7 @@ class Participante extends Model
 
     public function eventos()
     {
-        return $this->belongsToMany(Evento::class, 'event_participant');
+        return $this->belongsToMany(Evento::class, 'evento_participante');
     }
 
-    public function pagamento()
-    {
-        return $this->hasOne(Pagamento::class);
-    }
 }

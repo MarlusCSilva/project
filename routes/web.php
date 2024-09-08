@@ -30,22 +30,13 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/meus-eventos', [ParticipanteController::class, 'meusEventos'])->name('participante.meusEventos');
 });
 
-Route::middleware(['auth', 'admin'])->group(function () {
-    Route::get('/admin/dashboard', [AdministradorController::class, 'dashboard'])->name('admin.dashboard');
-    Route::get('/admin/usuarios', [AdministradorController::class, 'gerenciarUsers'])->name('admin.gerenciarUsers');
-    Route::get('/admin/usuarios/{user}/editar', [AdministradorController::class, 'editarUser'])->name('admin.editarUser');
-    Route::put('/admin/usuarios/{user}', [AdministradorController::class, 'atualizarUser'])->name('admin.atualizarUser');
-    Route::delete('/admin/usuarios/{user}', [AdministradorController::class, 'deletarUser'])->name('admin.deletarUser');
-    Route::get('/admin/configuracoes', [AdministradorController::class, 'configuracoesSite'])->name('admin.configuracoesSite');
-    Route::post('/admin/configuracoes', [AdministradorController::class, 'atualizarConfiguracoesSite'])->name('admin.atualizarConfiguracoesSite');
-});
-
 Route::middleware(['auth'])->group(function () {
     Route::get('/organizador/eventos', [OrganizadorController::class, 'index'])->name('organizador.index');
     Route::get('/organizador/eventos/criar', [OrganizadorController::class, 'createEvent'])->name('organizador.criarEvento');
+    Route::get('/organizador/eventos/{evento}', [OrganizadorController::class, 'show'])->name('organizador.showEvento');
     Route::post('/organizador/eventos', [OrganizadorController::class, 'storeEvento'])->name('organizador.storeEvento');
     Route::get('/organizador/eventos/{evento}/editar', [OrganizadorController::class, 'editarEvento'])->name('organizador.editarEvento');
-    Route::put('/organizador/eventos/{evento}', [OrganizadorController::class, 'atualizarEvent'])->name('organizador.atualizarEvent');
+    Route::put('/organizador/eventos/{evento}/atualizar', [OrganizadorController::class, 'atualizarEvento'])->name('organizador.atualizarEvent');
     Route::delete('/organizador/eventos/{evento}', [OrganizadorController::class, 'deletarEvento'])->name('organizador.deletarEvento');
 });
 

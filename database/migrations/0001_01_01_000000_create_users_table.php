@@ -35,9 +35,9 @@ return new class extends Migration
             $table->time('hora');
             $table->string('localizacao');
             $table->string('maximo_participantes');
-            $table->enum('status', ['ativo', 'inativo']);
+            $table->enum('status', ['ativo', 'inativo', 'cancelado', 'finalizado']);
             $table->string('categoria');
-            
+            $table->string('url');
             $table->foreignId('organizador_id')->constrained('organizadores')->onDelete('cascade');
             $table->timestamps();
         });
@@ -45,18 +45,17 @@ return new class extends Migration
         Schema::create('participantes', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
-            $table->string('ticket')->nullable();
             $table->timestamps();
         });
 
-        Schema::create('event_participant', function (Blueprint $table) {
+        Schema::create('evento_participante', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('participant_id');
-            $table->unsignedBigInteger('event_id');
+            $table->unsignedBigInteger('participante_id');
+            $table->unsignedBigInteger('evento_id');
             $table->timestamps();
 
-            $table->foreign('participant_id')->references('id')->on('participantes')->onDelete('cascade');
-            $table->foreign('event_id')->references('id')->on('eventos')->onDelete('cascade');
+            $table->foreign('participante_id')->references('id')->on('participantes')->onDelete('cascade');
+            $table->foreign('evento_id')->references('id')->on('eventos')->onDelete('cascade');
         });
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {
@@ -79,7 +78,7 @@ return new class extends Migration
     {
         Schema::dropIfExists('sessions');
         Schema::dropIfExists('password_reset_tokens');
-        Schema::dropIfExists('event_participant');
+        Schema::dropIfExists('evento_participante');
         Schema::dropIfExists('participantes');
         Schema::dropIfExists('eventos');
         Schema::dropIfExists('organizadores');

@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use App\Models\Evento;
 
@@ -13,12 +13,17 @@ class OrganizadorController extends Controller
         return view('organizador.index', compact('eventos'));
     }
 
+    public function show(Evento $evento)
+    {
+        return view('eventos.show', compact('evento'));
+    }
+
     public function createEvent()
     {
         return view('organizador.criarEvento');
     }
 
-        public function storeEvento(Request $request)
+    public function storeEvento(Request $request)
     {
         $validated = $request->validate([
             'nome' => 'required',
@@ -29,7 +34,13 @@ class OrganizadorController extends Controller
             'maximo_participantes' => 'required|integer',
             'status' => 'required',
             'categoria' => 'required',
+            'arquivo' => 'required|file|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
+
+        if ($request->hasFile('arquivo')) {
+            $arquivoPath = $request->file('arquivo')->store('arquivos', 'public');
+            $validated['url'] = Storage::url($arquivoPath);
+        }
 
         $organizador = auth()->user()->organizador;
         $validated['organizador_id'] = $organizador->id;
@@ -37,14 +48,13 @@ class OrganizadorController extends Controller
         return redirect()->route('organizador.index');
     }
 
-
     public function editarEvento($id)
     {
         $evento = Evento::findOrFail($id);
-        return view('organizador.editarEvento', compact('evento'));
+        return view('eventos.editarEvento', compact('evento'));
     }
 
-    public function atualizarEvent(Request $request, $id)
+    public function atualizarEvento(Request $request, $id)
     {
         $validated = $request->validate([
             'titulo' => 'required',
@@ -52,9 +62,10 @@ class OrganizadorController extends Controller
             'data' => 'required|date',
             'hora' => 'required',
             'localizacao' => 'required',
-            'numero_max_participantes' => 'required|integer',
+            'maximo_participantes' => 'required|integer',
             'status' => 'required',
             'categoria' => 'required',
+            'arquivo' => 'required|file|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
         $evento = Evento::findOrFail($id);

@@ -16,7 +16,7 @@ class EventoController extends Controller
 
     public function create()
     {
-        return view('evento.create');
+        return view('eventos.create');
     }
 
     public function store(Request $request)
@@ -39,12 +39,12 @@ class EventoController extends Controller
 
     public function show(Evento $evento)
     {
-        return view('evento.show', compact('evento'));
+        return view('eventos.show', compact('evento'));
     }
 
     public function edit(Evento $evento)
     {
-        return view('evento.edit', compact('evento'));
+        return view('eventos.edit', compact('evento'));
     }
 
     public function update(Request $request, Evento $evento)

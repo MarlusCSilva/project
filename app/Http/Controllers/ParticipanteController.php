@@ -18,7 +18,6 @@ class ParticipanteController extends Controller
         $participante = new Participante([
             'user_id' => auth()->id(),
             'evento_id' => $evento->id,
-            'ticket' => Str::random(10),
         ]);
 
         $participante->save();
@@ -44,7 +43,6 @@ class ParticipanteController extends Controller
         $participante = new Participante([
             'user_id' => auth()->id(),
             'evento_id' => $evento->id,
-            'ticket' => Str::random(10),
         ]);
 
         $participante->save();
