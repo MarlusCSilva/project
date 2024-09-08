@@ -11,7 +11,7 @@
     <style>
         /* Personalizações adicionais */
         body {
-            background-color: #0251c9; /* Fundo azul escuro */
+            background-color: #212529; /* Fundo azul escuro */
             color: #ffffff; /* Texto branco */
         }
         .background-image {
