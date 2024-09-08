@@ -21,7 +21,7 @@
                             <p class="card-text">Hora: {{ $evento->hora}}</p>
                             <p class="card-text">Descrição: {{ $evento->descricao}}</p>
                             <p class="card-text">Numeros de Participantes: {{ $evento->maximo_participantes}}</p>
-                            <a href="#" class="btn btn-primary">Inscrever-se</a>
+                            <a href="{{ $evento->id }}" class="btn btn-primary">Inscrever-se</a>
                         </div>
                     </div>
                 </div>

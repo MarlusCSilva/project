@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PdfController;
 use App\Http\Controllers\OrganizadorController;
 use App\Http\Controllers\EventoController;
 use App\Http\Controllers\PagamentoController;
@@ -13,6 +14,7 @@ use App\Http\Controllers\AdministradorController;
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/gerar-pdf', [PdfController::class, 'gerarPDF']);
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 
