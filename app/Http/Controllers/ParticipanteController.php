@@ -32,16 +32,14 @@ class ParticipanteController extends Controller
 
     public function participarEvento(Evento $evento)
     {
-        $participante = auth()->user()->userable;
+        $user = auth()->user();
 
-        // Debug: Verificar o que está sendo retornado por userable
-        dd($participante);
-
-        if (!$participante || !$participante instanceof Participante) {
+        if ($user->tipo_usuario !== 'participante') {
             return redirect()->back()->with('error', 'Somente participantes podem se inscrever em eventos.');
         }
 
-        if ($evento->participantes()->where('user_id', auth()->id())->exists()) {
+        $participante = $user->participante;
+        if ($evento->participantes()->where('participante_id', $participante->id)->exists()) {
             return redirect()->back()->with('error', 'Você já está cadastrado neste evento.');
         }
 
@@ -55,16 +53,27 @@ class ParticipanteController extends Controller
     }
 
 
-
-
-
     public function meusEventos()
-    {
-        $userable = auth()->user()->userable;
-        $eventos = $userable instanceof Participante ? $userable->eventos : collect();
-        return view('participante.meusEventos', compact('eventos'));
-    }
-    
+{
 
+    $user = auth()->user();
+
+    if ($user->userable instanceof \App\Models\Participante) {
+        // Obtenha o participante e seus eventos relacionados
+        $participante = $user->userable;
+
+        // Verifique o relacionamento diretamente
+        $eventos = $participante->eventos()->get();
+
+        // Debug para ver o que está sendo retornado
+        dd($eventos);
+
+    } else {
+        // Retorne uma coleção vazia se o usuário não for um participante
+        $eventos = collect();
+    }
+
+    return view('participante.meusEventos', compact('eventos'));
+}
 
 }

@@ -42,13 +42,16 @@ class RegisteredUserController extends Controller
 
         if ($request->tipo_usuario === 'organizador') {
             Organizador::create(['user_id' => $user->id, 'nome_empresa' => $request->nome_empresa]);
-        } else {
-            $participante = Participante::create(['user_id' => $user->id]);
+        }
 
+        if ($request->tipo_usuario === 'participante') {
+            $participante = Participante::create(['user_id' => $user->id]);
+        
             if ($request->has('eventos')) {
                 $participante->eventos()->attach($request->eventos);
             }
         }
+        
 
         auth()->login($user);
 

@@ -13,12 +13,14 @@ class Participante extends Model
 
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->morphOne(User::class, 'userable');
     }
+
 
     public function eventos()
     {
-        return $this->belongsToMany(Evento::class, 'evento_participante');
+        return $this->belongsToMany(Evento::class, 'evento_participante', 'participante_id', 'evento_id');
     }
+
 
 }

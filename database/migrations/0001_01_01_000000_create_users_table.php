@@ -53,7 +53,6 @@ return new class extends Migration
             $table->unsignedBigInteger('participante_id');
             $table->unsignedBigInteger('evento_id');
             $table->timestamps();
-
             $table->foreign('participante_id')->references('id')->on('participantes')->onDelete('cascade');
             $table->foreign('evento_id')->references('id')->on('eventos')->onDelete('cascade');
         });
