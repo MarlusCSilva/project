@@ -26,8 +26,9 @@ class User extends Authenticatable
 
     public function userable()
     {
-        return $this->morphTo();
+        return $this->morphTo(null, 'tipo_usuario', 'id_usuario');
     }
+
 
     public function organizador()
     {

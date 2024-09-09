@@ -32,23 +32,31 @@ class ParticipanteController extends Controller
 
     public function participarEvento(Evento $evento)
     {
+        $participante = auth()->user()->userable;
+
+        // Debug: Verificar o que está sendo retornado por userable
+        dd($participante);
+
+        if (!$participante || !$participante instanceof Participante) {
+            return redirect()->back()->with('error', 'Somente participantes podem se inscrever em eventos.');
+        }
+
         if ($evento->participantes()->where('user_id', auth()->id())->exists()) {
-            return redirect()->route('participante.participarEvents')->with('error', 'Você já está cadastrado neste evento.');
+            return redirect()->back()->with('error', 'Você já está cadastrado neste evento.');
         }
 
         if ($evento->participantes->count() >= $evento->maximo_participantes) {
-            return redirect()->route('participante.participarEvents')->with('error', 'Número máximo de participantes excedido para esse evento.');
+            return redirect()->back()->with('error', 'Número máximo de participantes excedido para esse evento.');
         }
 
-        $participante = new Participante([
-            'user_id' => auth()->id(),
-            'evento_id' => $evento->id,
-        ]);
-
-        $participante->save();
+        $participante->eventos()->attach($evento->id);
 
         return redirect()->route('participante.meusEventos')->with('success', 'Você se cadastrou neste evento com sucesso.');
     }
+
+
+
+
 
     public function meusEventos()
     {

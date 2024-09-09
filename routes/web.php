@@ -38,7 +38,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/organizador/eventos/{evento}', [OrganizadorController::class, 'show'])->name('organizador.showEvento');
     Route::post('/organizador/eventos', [OrganizadorController::class, 'storeEvento'])->name('organizador.storeEvento');
     Route::get('/organizador/eventos/{evento}/editar', [OrganizadorController::class, 'editarEvento'])->name('organizador.editarEvento');
-    Route::put('/organizador/eventos/{evento}/atualizar', [OrganizadorController::class, 'atualizarEvento'])->name('organizador.atualizarEvent');
+    Route::put('/organizador/eventos/{evento}/atualizar', [OrganizadorController::class, 'atualizarEvento'])->name('organizador.atualizarEvento');
     Route::delete('/organizador/eventos/{evento}', [OrganizadorController::class, 'deletarEvento'])->name('organizador.deletarEvento');
 });
 

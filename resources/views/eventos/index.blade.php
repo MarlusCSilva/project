@@ -4,6 +4,18 @@
 <div class="container mt-5">
     <h1 class="mb-5 text-center">Lista de Eventos</h1>
 
+    @if (session('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+    @endif
+
+    @if (session('error'))
+        <div class="alert alert-danger">
+            {{ session('error') }}
+        </div>
+    @endif
+
     @if($eventos->isEmpty())
         <div class="alert alert-warning text-center">
             Não há eventos cadastrados.
@@ -22,7 +34,10 @@
                             <p class="card-text">Descrição: {{ $evento->descricao}}</p>
                             <p class="card-text">Status: {{ $evento->status}}</p>
                             <p class="card-text">Numeros de Participantes: {{ $evento->maximo_participantes}}</p>
-                            <a href="{{ $evento->id }}" class="btn btn-primary">Inscrever-se</a>
+                            <form action="{{ route('participante.participarEvento', $evento->id) }}" method="POST">
+                                @csrf
+                                <button type="submit" class="btn btn-primary">Inscrever-se</button>
+                            </form>
                         </div>
                     </div>
                 </div>
