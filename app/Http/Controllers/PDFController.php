@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\Evento;
 use Illuminate\Http\Request;
-use FPDF;
+use FPDF\FPDF;
 class PDFController extends Controller
 {
     public function gerarPDF()
@@ -12,7 +12,7 @@ class PDFController extends Controller
         $eventos = Evento::all();
 
         // Cria uma instância do FPDF
-        $pdf = new FPDF;
+        $pdf = new FPDF();
         $pdf->AddPage();
         $pdf->SetFont('Arial', 'B', 16);
         $pdf->Cell(0, 10, 'Relatorio dos Eventos', 0, 1, 'C');
