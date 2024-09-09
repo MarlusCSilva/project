@@ -20,7 +20,7 @@
 
         <form action="{{ route('organizador.editarEvento', $evento) }}" method="post" enctype="multipart/form-data">
             @csrf
-           
+            @method('PUT')
 
             <div class="form-group">
                 <label for="titulo">Nome</label>
