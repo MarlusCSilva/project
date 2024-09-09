@@ -23,22 +23,27 @@ class PDFController extends Controller
 
         $pdf->SetFillColor(200, 220, 255); // Cor de fundo para cabeçalhos
         $pdf->SetFont('Arial', 'B', 12);
-        $pdf->Cell(50, 10, 'Nome', 1, 0, 'C', true);
+        $pdf->Cell(10, 10, 'ID', 1, 0, 'C', true);
+        $pdf->Cell(43, 10, 'Nome', 1, 0, 'C', true);
         $pdf->Cell(30, 10, 'Data', 1, 0, 'C', true);
         $pdf->Cell(30, 10, 'Descricao', 1, 0, 'C', true);
-        $pdf->Cell(40, 10, 'Local', 1, 1, 'C', true);
+        $pdf->Cell(40, 10, 'Local', 1, 0, 'C', true);
+        $pdf->Cell(40, 10, 'Hora', 1, 1, 'C', true);
 
         // Adicionar os dados dos eventos
         $pdf->SetFont('Arial', '', 12);
         foreach ($eventos as $evento) {
-            $pdf->Cell(50, 10, $evento->nome, 1, 0, 'L', $fill);
+            $pdf->Cell(10, 10, $evento->id, 1, 0, 'C', $fill);
+            $pdf->Cell(43, 10, $evento->nome, 1, 0, 'C', $fill);
             $pdf->Cell(30, 10, $evento->data, 1, 0, 'C', $fill);
-            $pdf->Cell(30, 10, $evento->descricao, 1, 0, 'L', $fill);
-            $pdf->Cell(40, 10, $evento->localizacao, 1, 1, 'L', $fill);
+            $pdf->Cell(30, 10, $evento->descricao, 1, 0, 'C', $fill);
+            $pdf->Cell(40, 10, $evento->localizacao, 1, 0, 'C', $fill);
+            $pdf->Cell(40, 10, $evento->hora, 1, 1, 'C', $fill);
             $pdf->Ln();
+            
         }
          // Adicionar rodapé
-        $pdf->SetY(-15);
+        $pdf->SetY(265);
         $pdf->SetFont('Arial', 'I', 10);
         $pdf->Cell(0, 10, 'Gerado por EventFlow', 0, 0, 'C');
 

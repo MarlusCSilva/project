@@ -19,7 +19,7 @@
         </div>
         @endif
 
-        <form action="{{ route('noticias.update', $evento) }}" method="post" enctype="multipart/form-data">
+        <form action="{{ route('organizador.atualizarEvento', $evento) }}" method="post" enctype="multipart/form-data">
             @csrf
             @method('PUT')
 

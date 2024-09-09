@@ -57,7 +57,7 @@ class OrganizadorController extends Controller
     public function atualizarEvento(Request $request, $id)
     {
         $validated = $request->validate([
-            'titulo' => 'required',
+            'nome' => 'required',
             'descricao' => 'required',
             'data' => 'required|date',
             'hora' => 'required',
