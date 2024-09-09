@@ -47,7 +47,7 @@ class PDFController extends Controller
         if ($pdf->GetY() + $alturaLinha > $alturaPagina - $margemInferior) { // Verifica se há espaço suficiente para a linha na página atual
             $pdf->AddPage(); // Adiciona uma nova página se necessário
 
-            // Re-adiciona cabeçalhos na nova página
+            //adiciona cabeçalhos na nova página
             $pdf->SetFont('Arial', 'B', 12);
             $pdf->MultiCell(10, 10, 'ID', 1, 0, 'C', true);
             $pdf->MultiCell(43, 10, 'Nome', 1, 0, 'C', true);

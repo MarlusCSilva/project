@@ -58,7 +58,7 @@ class ParticipanteController extends Controller
 
     $user = auth()->user();
 
-    if ($user->userable instanceof \App\Models\Participante) {
+    if ($user->userable instanceof Participante) {
         // Obtenha o participante e seus eventos relacionados
         $participante = $user->userable;
 
