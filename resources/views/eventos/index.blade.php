@@ -20,6 +20,7 @@
                             <p class="card-text">Local: {{ $evento->localizacao}}</p>
                             <p class="card-text">Hora: {{ $evento->hora}}</p>
                             <p class="card-text">Descrição: {{ $evento->descricao}}</p>
+                            <p class="card-text">Status: {{ $evento->status}}</p>
                             <p class="card-text">Numeros de Participantes: {{ $evento->maximo_participantes}}</p>
                             <a href="{{ $evento->id }}" class="btn btn-primary">Inscrever-se</a>
                         </div>
