@@ -14,7 +14,7 @@ use App\Http\Controllers\AdministradorController;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/gerar-pdf', [PdfController::class, 'gerarPDF']);
+Route::get('/gerar-pdf', [PdfController::class, 'gerarPDF'])->name('gerar.pdf');
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 
