@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\Evento;
 use Illuminate\Http\Request;
-use FPDF\FPDF;
+use FPDF;
 class PDFController extends Controller
 {
     public function gerarPDF()
