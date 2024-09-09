@@ -47,15 +47,6 @@
         </div>
 
         <div class="d-flex align-items-center ms-auto mx-3">
-            <button type="button" class="btn btn-primary position-relative me-3">
-                <span>Pagar Eventos</span>
-                <i class="bi bi-cart3"></i>
-                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                    {{ Auth::user()->userable && Auth::user()->userable->eventos ? Auth::user()->userable->eventos->count() : 0 }}
-                    <span class="visually-hidden">unread messages</span>
-                </span>
-            </button>
-
             <x-dropdown align="right" width="48">
                 <x-slot name="trigger">
                     <button
@@ -79,7 +70,7 @@
                             <i class="bi bi-person-fill me-2"></i> <!-- Ícone com margem à direita -->
                             <p class="mb-0">{{ Auth::user()->username }}</p> <!-- Texto sem margem inferior -->
                         </div>
-                        <x-dropdown-link :href="route('profile.edit')">
+                        <x-dropdown-link class="" :href="route('profile.edit')">
                             {{ __('Profile') }}
                         </x-dropdown-link>
                         <form method="POST" action="{{ route('logout') }}">
