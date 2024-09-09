@@ -12,16 +12,17 @@ class PDFController extends Controller
         $eventos = Evento::all();
 
         // Cria uma instância do FPDF
-        $pdf = new FPDF('L', 'mm', 'A4');
+        $pdf = new FPDF;
         $pdf->AddPage();
         $pdf->SetFont('Arial', 'B', 16);
+        $pdf->Image('img\logo-eventflow.png', 15, 3, 30); // Caminho, X, Y, largura
 
         // Adicionar cabeçalho
         $pdf->Cell(0, 10, 'Relatorio dos Eventos', 0, 1, 'C');
         $pdf->Ln(10);
         $fill = false;
 
-        $pdf->SetFillColor(200, 220, 255); // Cor de fundo para cabeçalhos
+        $pdf->SetFillColor(256, 256, 256); // Cor de fundo para cabeçalhos
         $pdf->SetFont('Arial', 'B', 12);
         $pdf->Cell(10, 10, 'ID', 1, 0, 'C', true);
         $pdf->Cell(43, 10, 'Nome', 1, 0, 'C', true);
@@ -44,7 +45,6 @@ class PDFController extends Controller
             $pdf->AddPage(); // Adiciona uma nova página se necessário
 
             // Re-adiciona cabeçalhos na nova página
-            $pdf->SetFillColor(200, 220, 255); // Cor de fundo para cabeçalhos
             $pdf->SetFont('Arial', 'B', 12);
             $pdf->MultiCell(10, 10, 'ID', 1, 0, 'C', true);
             $pdf->MultiCell(43, 10, 'Nome', 1, 0, 'C', true);
