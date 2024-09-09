@@ -1,3 +1,51 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+body {
+    background-color: #212529;
+    color: #ffffff;
+}
+.background-image {
+    position: fixed;
+    top: 0;
+    left: 0;
+    min-width: 100%;
+    min-height: 100%;
+    z-index: -1;
+    opacity: 0.5;
+    background: url('logo-eventflow.png') no-repeat center center fixed;
+    background-size: cover;
+}
+.login-register-buttons a {
+    width: 150px;
+    margin: 10px;
+}
+
+.text-shadow {
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.75); 
+}
+
+.text-outline {
+    color: white; 
+    text-shadow: 
+        -1px -1px 0 #000,  
+         1px -1px 0 #000,
+        -1px  1px 0 #000,
+         1px  1px 0 #000; 
+}
+
+.text-outline-thick {
+    color: white; /* Cor do texto */
+    text-shadow: 
+        -2px -2px 0 #000,  
+         2px -2px 0 #000,
+        -2px  2px 0 #000,
+         2px  2px 0 #000,
+        -2px  0px 0 #000,
+         2px  0px 0 #000,
+         0px -2px 0 #000,
+         0px  2px 0 #000; /* Contorno preto mais grosso ao redor do texto */
+}
+
+

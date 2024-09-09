@@ -15,6 +15,7 @@
         @endif
 
         <a href="{{ route('home') }}" class="btn btn-primary mb-3">Visualizar Tela de Apresentação</a>
+        <a href="{{ route('gerar.pdf') }}" class="btn btn-danger mb-3">Gerar relatório</a>
         
 
         @if($eventos->count())
