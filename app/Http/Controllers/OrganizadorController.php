@@ -68,6 +68,13 @@ class OrganizadorController extends Controller
             'arquivo' => 'required|file|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
+        if ($request->hasFile('arquivo')) {
+            $arquivoPath = $request->file('arquivo')->store('arquivos', 'public');
+            $validated['url'] = Storage::url($arquivoPath);
+        }
+
+        $organizador = auth()->user()->organizador;
+        $validated['organizador_id'] = $organizador->id;
         $evento = Evento::findOrFail($id);
         $evento->update($validated);
 

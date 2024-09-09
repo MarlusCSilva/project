@@ -60,7 +60,7 @@
             </div>
             <div class="form-group">
                 <label for="categoria">Categoria</label>
-                <input type="text" class="form-control" name="categoria" id="categoria" required>
+                <input type="text" class="form-control" name="categoria" id="categoria" value="{{ $evento->categoria }}">
             </div>
             <div class="form-group">
                 <label for="url">Arquivo</label>
