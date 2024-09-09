@@ -58,6 +58,7 @@ class EventoController extends Controller
             'maximo_participantes' => 'required|integer',
             'status' => 'required|string|max:255',
             'categoria' => 'required|string|max:255',
+            'arquivo' => 'required|file|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
         $evento->update($validated);

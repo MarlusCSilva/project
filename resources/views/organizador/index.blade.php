@@ -14,7 +14,8 @@
             </div>
         @endif
 
-        <a href="{{ route('home') }}" class="btn btn-primary mb-3">Visualizar Todas as Notícias</a>
+        <a href="{{ route('home') }}" class="btn btn-primary mb-3">Visualizar Tela de Apresentação</a>
+        
 
         @if($eventos->count())
             <table class="table table-hover table-striped table-bordered text-center align-middle mt-2">
